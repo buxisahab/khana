@@ -699,3 +699,68 @@ body {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
+
+/* Bottom Navigation (Mobile) */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--glass-border);
+  z-index: 100;
+  justify-content: space-around;
+  padding: 0.8rem 0;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.05);
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.75rem;
+  font-weight: 500;
+  gap: 0.3rem;
+  transition: var(--transition);
+  cursor: pointer;
+  background: none;
+  border: none;
+  width: 25%;
+}
+
+.nav-item i {
+  font-size: 1.3rem;
+}
+
+.nav-item.active, .nav-item:hover {
+  color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: 70px;
+  }
+  .bottom-nav {
+    display: flex;
+  }
+  .floating-cart {
+    bottom: 85px; /* Push above bottom nav */
+    right: 1rem;
+    width: 55px;
+    height: 55px;
+  }
+  .navbar {
+    padding: 1rem;
+  }
+  .nav-links #authNavContainer {
+    display: none; /* Hide top auth/profile on mobile, use bottom nav */
+  }
+  .toast-container {
+    bottom: 85px; /* Above bottom nav */
+  }
+}

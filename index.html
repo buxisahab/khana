@@ -51,6 +51,14 @@
     <div class="food-card glass skeleton" style="height: 350px;"></div>
   </section>
 
+  <!-- User Orders Section (Hidden by default) -->
+  <section class="food-feed" id="userOrdersSection" style="display: none;">
+    <h2 style="grid-column: 1/-1; text-align: center; margin-bottom: 1rem;">Your Orders</h2>
+    <div style="grid-column: 1/-1;" id="userOrdersList">
+      <p style="text-align: center; color: var(--text-secondary);">You have no past orders yet.</p>
+    </div>
+  </section>
+
   <!-- Floating Cart -->
   <div class="floating-cart" id="floatingCartBtn">
     <i class="fas fa-shopping-bag"></i>
@@ -70,15 +78,15 @@
     <div class="cart-footer">
       <div class="cart-total-row">
         <span>Subtotal</span>
-        <span id="cartSubtotal">$0.00</span>
+        <span id="cartSubtotal">₹0.00</span>
       </div>
       <div class="cart-total-row">
         <span>Delivery Fee</span>
-        <span id="cartDelivery">$0.00</span>
+        <span id="cartDelivery">₹0.00</span>
       </div>
       <div class="cart-total-row grand-total">
         <span>Total</span>
-        <span id="cartTotal">$0.00</span>
+        <span id="cartTotal">₹0.00</span>
       </div>
       <button class="btn-primary" style="width: 100%; justify-content: center;" id="checkoutBtn">Place Order</button>
     </div>
@@ -148,6 +156,26 @@
       </form>
     </div>
   </div>
+
+  <!-- Bottom Navigation (Mobile) -->
+  <nav class="bottom-nav">
+    <button class="nav-item active" id="bNavHome">
+      <i class="fas fa-home"></i>
+      <span>Home</span>
+    </button>
+    <button class="nav-item" id="bNavCart">
+      <i class="fas fa-shopping-bag"></i>
+      <span>Cart</span>
+    </button>
+    <button class="nav-item" id="bNavOrders">
+      <i class="fas fa-receipt"></i>
+      <span>Orders</span>
+    </button>
+    <button class="nav-item" id="bNavProfile">
+      <i class="fas fa-user"></i>
+      <span>Profile</span>
+    </button>
+  </nav>
 
   <div class="toast-container" id="toastContainer"></div>
 

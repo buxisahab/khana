@@ -185,7 +185,7 @@ if (productsTableBody) {
           <td><img src="${product.image}" alt="${product.name}" style="width: 50px; height: 50px; object-fit: cover; border-radius: var(--radius-sm);"></td>
           <td><strong>${product.name}</strong></td>
           <td><span class="category-chip" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">${product.category}</span></td>
-          <td style="color: var(--primary-color); font-weight: 600;">$${parseFloat(product.price).toFixed(2)}</td>
+          <td style="color: var(--primary-color); font-weight: 600;">₹${parseFloat(product.price).toFixed(2)}</td>
           <td>
             <button class="nav-btn delete-prod" data-id="${key}" style="color: var(--primary-color);"><i class="fas fa-trash"></i></button>
           </td>
@@ -249,7 +249,7 @@ if (ordersTableBody) {
           </td>
           <td>
             <div style="max-width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 0.9rem;" title="${itemsStr}">${itemsStr}</div>
-            <div style="font-weight: 600; margin-top: 0.5rem;">$${order.total}</div>
+            <div style="font-weight: 600; margin-top: 0.5rem;">₹${order.total}</div>
           </td>
           <td>
             <span class="status-badge ${statusClass}">${order.status}</span>

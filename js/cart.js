@@ -46,9 +46,9 @@ function updateCartUI() {
   if (cart.length === 0) {
     cartItemsContainer.innerHTML = '<p style="text-align: center; color: var(--text-secondary); margin-top: 2rem;">Your cart is empty</p>';
     cartBadge.innerText = '0';
-    cartSubtotal.innerText = '$0.00';
-    cartDelivery.innerText = '$0.00';
-    cartTotal.innerText = '$0.00';
+    cartSubtotal.innerText = '₹0.00';
+    cartDelivery.innerText = '₹0.00';
+    cartTotal.innerText = '₹0.00';
     return;
   }
   
@@ -65,7 +65,7 @@ function updateCartUI() {
       <img src="${item.image}" alt="${item.name}">
       <div class="cart-item-info">
         <div class="cart-item-title">${item.name}</div>
-        <div class="cart-item-price">$${parseFloat(item.price).toFixed(2)}</div>
+        <div class="cart-item-price">₹${parseFloat(item.price).toFixed(2)}</div>
       </div>
       <div class="cart-item-qty">
         <button class="qty-btn dec" data-index="${index}">-</button>
@@ -77,9 +77,9 @@ function updateCartUI() {
   });
   
   cartBadge.innerText = totalItems;
-  cartSubtotal.innerText = `$${subtotal.toFixed(2)}`;
-  cartDelivery.innerText = `$${deliveryFee.toFixed(2)}`;
-  cartTotal.innerText = `$${(subtotal + deliveryFee).toFixed(2)}`;
+  cartSubtotal.innerText = `₹${subtotal.toFixed(2)}`;
+  cartDelivery.innerText = `₹${deliveryFee.toFixed(2)}`;
+  cartTotal.innerText = `₹${(subtotal + deliveryFee).toFixed(2)}`;
   
   // Attach events
   document.querySelectorAll('.qty-btn.inc').forEach(btn => {
