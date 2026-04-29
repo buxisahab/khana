@@ -124,7 +124,7 @@
           <input type="email" id="registerEmail" placeholder="Email Address" required>
         </div>
         <div class="form-group">
-          <input type="tel" id="registerPhone" placeholder="Phone Number" required>
+          <input type="tel" id="registerPhone" placeholder="Phone Number" pattern="[0-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" required>
         </div>
         <div class="form-group">
           <input type="text" id="registerAddress" placeholder="Delivery Address" required>
@@ -150,7 +150,7 @@
       <p style="text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem;">Please add your phone number and address before ordering.</p>
       <form class="auth-form" id="profileForm">
         <div class="form-group">
-          <input type="tel" id="profilePhone" placeholder="Phone Number" required>
+          <input type="tel" id="profilePhone" placeholder="Phone Number" pattern="[0-9]{10}" maxlength="10" title="Please enter a valid 10-digit phone number" required>
         </div>
         <div class="form-group">
           <input type="text" id="profileAddress" placeholder="Delivery Address" required>
