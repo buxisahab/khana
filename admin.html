@@ -3,6 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
   <title>Admin Dashboard - Mission Khana</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -135,6 +138,26 @@
   </div>
 
   <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Bottom Navigation (Mobile) for Admin -->
+  <nav class="bottom-nav" id="adminBottomNav">
+    <a href="index.html" class="nav-item">
+      <i class="fas fa-store"></i>
+      <span>Store</span>
+    </a>
+    <button class="nav-item active" id="bNavAdminProducts">
+      <i class="fas fa-box"></i>
+      <span>Products</span>
+    </button>
+    <button class="nav-item" id="bNavAdminOrders">
+      <i class="fas fa-shopping-cart"></i>
+      <span>Orders</span>
+    </button>
+    <button class="nav-item" id="bNavAdminAdd">
+      <i class="fas fa-plus-circle"></i>
+      <span>Add New</span>
+    </button>
+  </nav>
 
   <!-- Firebase Scripts (Modular) -->
   <script type="module" src="js/firebase-config.js"></script>

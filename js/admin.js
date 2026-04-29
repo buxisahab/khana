@@ -76,6 +76,32 @@ if (navProducts && navOrders) {
   });
 }
 
+// Mobile Bottom Nav for Admin
+const bNavAdminProducts = document.getElementById('bNavAdminProducts');
+const bNavAdminOrders = document.getElementById('bNavAdminOrders');
+const bNavAdminAdd = document.getElementById('bNavAdminAdd');
+
+if (bNavAdminProducts && bNavAdminOrders && bNavAdminAdd) {
+  bNavAdminProducts.addEventListener('click', () => {
+    bNavAdminProducts.classList.add('active');
+    bNavAdminOrders.classList.remove('active');
+    productsSection.style.display = 'block';
+    ordersSection.style.display = 'none';
+  });
+
+  bNavAdminOrders.addEventListener('click', () => {
+    bNavAdminOrders.classList.add('active');
+    bNavAdminProducts.classList.remove('active');
+    ordersSection.style.display = 'block';
+    productsSection.style.display = 'none';
+  });
+
+  bNavAdminAdd.addEventListener('click', () => {
+    const productModal = document.getElementById('productModal');
+    if(productModal) productModal.classList.add('active');
+  });
+}
+
 if (navLogout) {
   navLogout.addEventListener('click', async (e) => {
     e.preventDefault();
