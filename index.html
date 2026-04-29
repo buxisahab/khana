@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Khana - Premium Food Delivery</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar glass">
+    <a href="#" class="logo">
+      <i class="fas fa-hamburger"></i> Mission Khana
+    </a>
+    <div class="nav-links">
+      <button class="nav-btn" id="themeToggle"><i class="fas fa-moon"></i></button>
+      <div id="authNavContainer">
+        <!-- Dynamically injected login or user profile -->
+        <button class="btn-primary" id="loginBtn">Login / Sign Up</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Craving Something <br><span>Delicious?</span></h1>
+    <p>Get the best food from top restaurants delivered to your doorstep in minutes.</p>
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search for dishes, restaurants...">
+      <button class="btn-primary"><i class="fas fa-search"></i> Search</button>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories" id="categoryContainer">
+    <div class="category-chip active" data-category="All">All</div>
+    <div class="category-chip" data-category="Pizza">🍕 Pizza</div>
+    <div class="category-chip" data-category="Burger">🍔 Burger</div>
+    <div class="category-chip" data-category="Drinks">🥤 Drinks</div>
+    <div class="category-chip" data-category="Healthy">🥗 Healthy</div>
+    <div class="category-chip" data-category="Desserts">🍰 Desserts</div>
+  </section>
+
+  <!-- Food Feed -->
+  <section class="food-feed" id="foodFeed">
+    <!-- Skeletons while loading -->
+    <div class="food-card glass skeleton" style="height: 350px;"></div>
+    <div class="food-card glass skeleton" style="height: 350px;"></div>
+    <div class="food-card glass skeleton" style="height: 350px;"></div>
+    <div class="food-card glass skeleton" style="height: 350px;"></div>
+  </section>
+
+  <!-- Floating Cart -->
+  <div class="floating-cart" id="floatingCartBtn">
+    <i class="fas fa-shopping-bag"></i>
+    <div class="cart-badge" id="cartBadge">0</div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer glass" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Your Cart</h2>
+      <button class="nav-btn close-cart" id="closeCartBtn"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="cart-items" id="cartItemsContainer">
+      <!-- Cart items injected here -->
+      <p style="text-align: center; color: var(--text-secondary); margin-top: 2rem;">Your cart is empty</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">$0.00</span>
+      </div>
+      <div class="cart-total-row">
+        <span>Delivery Fee</span>
+        <span id="cartDelivery">$0.00</span>
+      </div>
+      <div class="cart-total-row grand-total">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn-primary" style="width: 100%; justify-content: center;" id="checkoutBtn">Place Order</button>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div class="modal-overlay" id="authModal">
+    <div class="auth-modal glass">
+      <button class="close-modal" id="closeAuthBtn"><i class="fas fa-times"></i></button>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin">Login</button>
+        <button class="auth-tab" id="tabRegister">Register</button>
+      </div>
+      
+      <!-- Login Form -->
+      <form class="auth-form" id="loginForm">
+        <div class="form-group">
+          <input type="email" id="loginEmail" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="loginPassword" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn-primary" style="justify-content: center;">Login</button>
+      </form>
+
+      <!-- Register Form (Hidden by default) -->
+      <form class="auth-form" id="registerForm" style="display: none;">
+        <div class="form-group">
+          <input type="text" id="registerName" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="registerEmail" placeholder="Email Address" required>
+        </div>
+        <div class="form-group">
+          <input type="password" id="registerPassword" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn-primary" style="justify-content: center;">Sign Up</button>
+      </form>
+
+      <button class="btn-primary google-btn" id="googleSignInBtn" style="width: 100%;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="G"> 
+        Continue with Google
+      </button>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Firebase Scripts (Modular) -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/auth.js"></script>
+  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/cart.js"></script>
+</body>
+</html>

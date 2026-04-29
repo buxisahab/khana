@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Mission Khana</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body style="background-color: var(--bg-color);">
+  <div class="admin-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar glass">
+      <a href="index.html" class="logo" style="font-size: 1.5rem;">
+        <i class="fas fa-hamburger"></i> Admin
+      </a>
+      <nav class="sidebar-nav">
+        <a href="#" class="sidebar-link active" id="navProducts">
+          <i class="fas fa-box"></i> Products
+        </a>
+        <a href="#" class="sidebar-link" id="navOrders">
+          <i class="fas fa-shopping-cart"></i> Orders
+        </a>
+        <a href="#" class="sidebar-link" id="navLogout">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="admin-content" id="mainContent">
+      <!-- Products Section -->
+      <section id="productsSection">
+        <div class="admin-header">
+          <h2>Product Management</h2>
+          <button class="btn-primary" id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
+        </div>
+        
+        <div class="glass" style="border-radius: var(--radius-md); overflow: hidden;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="productsTableBody">
+              <!-- Dynamically injected -->
+              <tr><td colspan="5" style="text-align: center;">Loading products...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Orders Section (Hidden by default) -->
+      <section id="ordersSection" style="display: none;">
+        <div class="admin-header">
+          <h2>Order Management</h2>
+        </div>
+        
+        <div class="glass" style="border-radius: var(--radius-md); overflow: hidden;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>User</th>
+                <th>Items & Total</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="ordersTableBody">
+              <!-- Dynamically injected -->
+              <tr><td colspan="5" style="text-align: center;">Loading orders...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Add Product Modal -->
+  <div class="modal-overlay" id="productModal">
+    <div class="auth-modal glass" style="max-width: 500px;">
+      <button class="close-modal" id="closeProductModal"><i class="fas fa-times"></i></button>
+      <h3 style="margin-bottom: 1.5rem;">Add New Product</h3>
+      <form class="auth-form" id="productForm">
+        <div class="form-group">
+          <input type="text" id="prodName" placeholder="Product Name" required>
+        </div>
+        <div class="form-group">
+          <input type="number" id="prodPrice" placeholder="Price ($)" step="0.01" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="prodDesc" placeholder="Description (Optional)">
+        </div>
+        <div class="form-group">
+          <input type="url" id="prodImage" placeholder="Image URL" required>
+        </div>
+        <div class="form-group">
+          <select id="prodCategory" required style="width: 100%; padding: 0.8rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--glass-border); background: var(--bg-color); color: var(--text-primary); outline: none;">
+            <option value="" disabled selected>Select Category</option>
+            <option value="Pizza">Pizza</option>
+            <option value="Burger">Burger</option>
+            <option value="Drinks">Drinks</option>
+            <option value="Healthy">Healthy</option>
+            <option value="Desserts">Desserts</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary" style="justify-content: center; margin-top: 1rem;">Save Product</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Firebase Scripts (Modular) -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/admin.js"></script>
+</body>
+</html>
