@@ -2,7 +2,12 @@ import { db, ref, set, push, onValue, remove, update, auth, signOut, onAuthState
 
 // Auth Guard
 onAuthStateChanged(auth, (user) => {
-  if (!user || user.uid !== 'khjvyZ1dw1NzpCc6jXde7ERVpmi1') {
+  if (!user) {
+    // Not logged in, redirect
+    window.location.href = 'index.html';
+  } else if (user.uid !== 'khjvyZ1dw1NzpCc6jXde7ERVpmi1') {
+    // Logged in but not admin
+    alert("Access Denied! Your current UID is: " + user.uid + "\nThis does not match the admin UID.");
     window.location.href = 'index.html';
   }
 });
