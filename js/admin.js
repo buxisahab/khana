@@ -120,8 +120,14 @@ const productModal = document.getElementById('productModal');
 const closeProductModal = document.getElementById('closeProductModal');
 const productForm = document.getElementById('productForm');
 
+let editingProductId = null;
+
 if (addProductBtn) {
   addProductBtn.addEventListener('click', () => {
+    editingProductId = null;
+    const modalTitle = document.getElementById('modalTitle');
+    if(modalTitle) modalTitle.innerText = 'Add New Product';
+    if(productForm) productForm.reset();
     productModal.classList.add('active');
   });
 }
@@ -152,11 +158,17 @@ if (productForm) {
         category
       };
       
-      const newProdRef = push(ref(db, 'products'));
-      await set(newProdRef, productData);
+      if (editingProductId) {
+        await update(ref(db, `products/${editingProductId}`), productData);
+        showToast("Product updated successfully!");
+      } else {
+        const newProdRef = push(ref(db, 'products'));
+        await set(newProdRef, productData);
+        showToast("Product added successfully!");
+      }
       
-      showToast("Product added successfully!");
       productForm.reset();
+      editingProductId = null;
       productModal.classList.remove('active');
     } catch (error) {
       showToast("Failed to add product: " + error.message);
@@ -213,6 +225,7 @@ if (productsTableBody) {
           <td><span class="category-chip" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;">${product.category}</span></td>
           <td style="color: var(--primary-color); font-weight: 600;">₹${parseFloat(product.price).toFixed(2)}</td>
           <td>
+            <button class="nav-btn edit-prod" data-id="${key}" style="color: #3b82f6; margin-right: 0.8rem;"><i class="fas fa-edit"></i></button>
             <button class="nav-btn delete-prod" data-id="${key}" style="color: var(--primary-color);"><i class="fas fa-trash"></i></button>
           </td>
         `;
@@ -230,6 +243,27 @@ if (productsTableBody) {
             } catch (error) {
               showToast("Delete failed: " + error.message);
             }
+          }
+        });
+      });
+
+      // Attach edit events
+      document.querySelectorAll('.edit-prod').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const id = e.target.closest('button').dataset.id;
+          const product = data[id];
+          if(product) {
+            editingProductId = id;
+            const modalTitle = document.getElementById('modalTitle');
+            if(modalTitle) modalTitle.innerText = 'Edit Product';
+            
+            document.getElementById('prodName').value = product.name || '';
+            document.getElementById('prodPrice').value = product.price || '';
+            document.getElementById('prodDesc').value = product.description || '';
+            document.getElementById('prodImage').value = product.image || '';
+            document.getElementById('prodCategory').value = product.category || '';
+            
+            productModal.classList.add('active');
           }
         });
       });
