@@ -1,4 +1,4 @@
-import { db, ref, push, set } from './firebase-config.js';
+import { db, ref, push, set, get, child } from './firebase-config.js';
 import { currentUser, showToast } from './auth.js';
 
 let cart = [];
@@ -118,6 +118,26 @@ if (checkoutBtn) {
       return;
     }
     
+    // Check Profile
+    checkoutBtn.innerText = 'Checking profile...';
+    checkoutBtn.disabled = true;
+    try {
+      const snapshot = await get(child(ref(db), `users/${currentUser.uid}`));
+      const userData = snapshot.val();
+      if (!userData || !userData.phone || !userData.address) {
+        document.getElementById('profileModal').classList.add('active');
+        cartDrawer.classList.remove('active');
+        checkoutBtn.innerText = 'Place Order';
+        checkoutBtn.disabled = false;
+        return;
+      }
+    } catch(err) {
+      checkoutBtn.innerText = 'Place Order';
+      checkoutBtn.disabled = false;
+      showToast("Error checking profile: " + err.message);
+      return;
+    }
+    
     checkoutBtn.innerText = 'Processing...';
     checkoutBtn.disabled = true;
     
@@ -151,6 +171,37 @@ if (checkoutBtn) {
     } finally {
       checkoutBtn.innerText = 'Place Order';
       checkoutBtn.disabled = false;
+    }
+  });
+}
+
+// Profile Completion Modal
+const profileModal = document.getElementById('profileModal');
+const closeProfileBtn = document.getElementById('closeProfileBtn');
+const profileForm = document.getElementById('profileForm');
+
+if (closeProfileBtn) {
+  closeProfileBtn.addEventListener('click', () => profileModal.classList.remove('active'));
+}
+
+if (profileForm) {
+  profileForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (!currentUser) return;
+    const phone = document.getElementById('profilePhone').value;
+    const address = document.getElementById('profileAddress').value;
+    try {
+      await set(ref(db, 'users/' + currentUser.uid), {
+        name: currentUser.displayName || 'Guest',
+        email: currentUser.email || '',
+        phone: phone,
+        address: address
+      });
+      showToast("Profile updated! You can now place your order.");
+      profileModal.classList.remove('active');
+      cartDrawer.classList.add('active');
+    } catch (err) {
+      showToast("Error updating profile: " + err.message);
     }
   });
 }

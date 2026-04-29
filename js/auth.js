@@ -1,4 +1,4 @@
-import { auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, updateProfile } from './firebase-config.js';
+import { auth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged, updateProfile, db, ref, set } from './firebase-config.js';
 
 // DOM Elements
 const authModal = document.getElementById('authModal');
@@ -80,9 +80,21 @@ if (registerForm) {
     const email = document.getElementById('registerEmail').value;
     const password = document.getElementById('registerPassword').value;
     
+    const phone = document.getElementById('registerPhone').value;
+    const address = document.getElementById('registerAddress').value;
+    
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await updateProfile(userCredential.user, { displayName: name });
+      
+      // Save extra details to Realtime DB
+      await set(ref(db, 'users/' + userCredential.user.uid), {
+        name: name,
+        email: email,
+        phone: phone,
+        address: address
+      });
+
       showToast("Account created successfully!");
       authModal.classList.remove('active');
       registerForm.reset();
@@ -110,7 +122,7 @@ onAuthStateChanged(auth, (user) => {
   currentUser = user;
   if (user && authNavContainer) {
     // Logged in UI
-    const isAdmin = user.email && user.email.includes('admin'); // Simple admin check
+    const isAdmin = user.uid === 'khjvyZ1dw1NzpCc6jXde7ERVpmi1';
     let html = `<div style="display: flex; align-items: center; gap: 1rem;">
                   <span style="font-weight: 500;">Hi, ${user.displayName || 'User'}</span>`;
     

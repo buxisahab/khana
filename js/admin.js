@@ -1,6 +1,11 @@
-import { db, ref, set, push, onValue, remove, update } from './firebase-config.js';
-import { signOut } from './firebase-config.js';
-import { auth } from './firebase-config.js';
+import { db, ref, set, push, onValue, remove, update, auth, signOut, onAuthStateChanged } from './firebase-config.js';
+
+// Auth Guard
+onAuthStateChanged(auth, (user) => {
+  if (!user || user.uid !== 'khjvyZ1dw1NzpCc6jXde7ERVpmi1') {
+    window.location.href = 'index.html';
+  }
+});
 
 // Simple toast for admin
 function showToast(message) {

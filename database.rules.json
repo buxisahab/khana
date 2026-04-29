@@ -1,0 +1,18 @@
+{
+  "rules": {
+    "products": {
+      ".read": "true",
+      ".write": "auth != null && auth.uid === 'khjvyZ1dw1NzpCc6jXde7ERVpmi1'"
+    },
+    "orders": {
+      ".read": "auth != null && auth.uid === 'khjvyZ1dw1NzpCc6jXde7ERVpmi1'",
+      ".write": "auth != null"
+    },
+    "users": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid === $uid || auth.uid === 'khjvyZ1dw1NzpCc6jXde7ERVpmi1')",
+        ".write": "auth != null && (auth.uid === $uid || auth.uid === 'khjvyZ1dw1NzpCc6jXde7ERVpmi1')"
+      }
+    }
+  }
+}
