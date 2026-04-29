@@ -129,7 +129,7 @@ body {
 }
 
 .hero h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: 700;
   margin-bottom: 1rem;
   line-height: 1.2;
@@ -151,9 +151,10 @@ body {
   width: 100%;
   max-width: 600px;
   background: var(--card-bg);
-  border-radius: var(--radius-md);
-  padding: 0.5rem;
+  border-radius: 50px;
+  padding: 0.4rem;
   box-shadow: var(--shadow-lg);
+  align-items: center;
 }
 
 .search-bar input {
@@ -164,11 +165,13 @@ body {
   font-size: 1rem;
   color: var(--text-primary);
   outline: none;
+  width: 100%;
 }
 
 .search-bar button {
   padding: 0.8rem 2rem;
-  border-radius: var(--radius-sm);
+  border-radius: 50px;
+  white-space: nowrap;
 }
 
 /* Categories */
@@ -613,6 +616,8 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .data-table {
@@ -645,12 +650,15 @@ body {
 
 /* Responsive */
 @media (max-width: 768px) {
-  .hero h1 { font-size: 2.5rem; }
   .cart-drawer { width: 100%; right: -100%; }
   .admin-layout { flex-direction: column; }
   .sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--glass-border); padding: 1rem; }
   .sidebar-nav { margin-top: 1rem; flex-direction: row; overflow-x: auto; }
   .food-feed { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+}
+@media (max-width: 480px) {
+  .food-feed { grid-template-columns: 1fr; }
+  .hero { padding: 6rem 5% 3rem; }
 }
 
 /* Toast Notification */
@@ -749,27 +757,31 @@ body {
     display: flex;
   }
   .floating-cart {
-    bottom: 85px; /* Push above bottom nav */
-    right: 1rem;
-    width: 55px;
-    height: 55px;
+    display: none !important; /* Hide redundant cart FAB on mobile */
   }
   .navbar {
     padding: 1rem;
   }
+  .nav-links {
+    gap: 1rem;
+  }
   .nav-links #authNavContainer {
-    display: block; /* Show top auth/profile on mobile too */
+    display: none !important; /* Hide on mobile, use bottom nav profile */
   }
   .search-bar {
-    flex-direction: column;
-    padding: 0.5rem;
+    flex-direction: row;
+    padding: 0.3rem;
   }
   .search-bar input {
     width: 100%;
-    margin-bottom: 0.5rem;
+    min-width: 0;
+    margin-bottom: 0;
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
   }
   .search-bar button {
-    width: 100%;
+    width: auto;
+    padding: 0.6rem 1rem;
   }
   .toast-container {
     bottom: 85px; /* Above bottom nav */
