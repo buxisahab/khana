@@ -1,16 +1,44 @@
-import { db, ref, set, push, onValue, remove, update, auth, signOut, onAuthStateChanged } from './firebase-config.js';
+import { db, ref, set, push, onValue, remove, update, auth, signOut, onAuthStateChanged, signInWithEmailAndPassword } from './firebase-config.js';
+
+// Elements for login toggle
+const adminLoginContainer = document.getElementById('adminLoginContainer');
+const adminDashboardLayout = document.getElementById('adminDashboardLayout');
+const adminLoginForm = document.getElementById('adminLoginForm');
 
 // Auth Guard
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    // Not logged in, redirect
-    window.location.href = 'index.html';
+    // Not logged in, show login box
+    adminLoginContainer.style.display = 'flex';
+    adminDashboardLayout.style.display = 'none';
   } else if (user.uid !== 'khjvyZ1dw1NzpCc6jXde7ERVpmi1') {
     // Logged in but not admin
-    alert("Access Denied! Your current UID is: " + user.uid + "\nThis does not match the admin UID.");
-    window.location.href = 'index.html';
+    alert("Access Denied! Your current UID is: " + user.uid + "\nThis does not match the admin UID. Logging out.");
+    await signOut(auth);
+    adminLoginContainer.style.display = 'flex';
+    adminDashboardLayout.style.display = 'none';
+  } else {
+    // Is admin, show dashboard
+    adminLoginContainer.style.display = 'none';
+    adminDashboardLayout.style.display = 'flex';
   }
 });
+
+// Admin Login Submission
+if (adminLoginForm) {
+  adminLoginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('adminLoginEmail').value;
+    const password = document.getElementById('adminLoginPassword').value;
+    
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // onAuthStateChanged will handle the UI switch if successful
+    } catch (error) {
+      showToast("Login failed: " + error.message);
+    }
+  });
+}
 
 // Simple toast for admin
 function showToast(message) {
