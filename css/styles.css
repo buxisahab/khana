@@ -758,7 +758,18 @@ body {
     padding: 1rem;
   }
   .nav-links #authNavContainer {
-    display: none; /* Hide top auth/profile on mobile, use bottom nav */
+    display: block; /* Show top auth/profile on mobile too */
+  }
+  .search-bar {
+    flex-direction: column;
+    padding: 0.5rem;
+  }
+  .search-bar input {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  .search-bar button {
+    width: 100%;
   }
   .toast-container {
     bottom: 85px; /* Above bottom nav */

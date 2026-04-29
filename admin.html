@@ -102,6 +102,25 @@
         </div>
       </section>
     </main>
+    <!-- Bottom Navigation (Mobile) for Admin -->
+    <nav class="bottom-nav" id="adminBottomNav">
+      <a href="index.html" class="nav-item">
+        <i class="fas fa-store"></i>
+        <span>Store</span>
+      </a>
+      <button class="nav-item active" id="bNavAdminProducts">
+        <i class="fas fa-box"></i>
+        <span>Products</span>
+      </button>
+      <button class="nav-item" id="bNavAdminOrders">
+        <i class="fas fa-shopping-cart"></i>
+        <span>Orders</span>
+      </button>
+      <button class="nav-item" id="bNavAdminAdd">
+        <i class="fas fa-plus-circle"></i>
+        <span>Add New</span>
+      </button>
+    </nav>
   </div>
 
   <!-- Add Product Modal -->
@@ -138,26 +157,6 @@
   </div>
 
   <div class="toast-container" id="toastContainer"></div>
-
-  <!-- Bottom Navigation (Mobile) for Admin -->
-  <nav class="bottom-nav" id="adminBottomNav">
-    <a href="index.html" class="nav-item">
-      <i class="fas fa-store"></i>
-      <span>Store</span>
-    </a>
-    <button class="nav-item active" id="bNavAdminProducts">
-      <i class="fas fa-box"></i>
-      <span>Products</span>
-    </button>
-    <button class="nav-item" id="bNavAdminOrders">
-      <i class="fas fa-shopping-cart"></i>
-      <span>Orders</span>
-    </button>
-    <button class="nav-item" id="bNavAdminAdd">
-      <i class="fas fa-plus-circle"></i>
-      <span>Add New</span>
-    </button>
-  </nav>
 
   <!-- Firebase Scripts (Modular) -->
   <script type="module" src="js/firebase-config.js"></script>
