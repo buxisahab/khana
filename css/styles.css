@@ -97,6 +97,10 @@ body {
   color: var(--primary-color);
 }
 
+.desktop-only {
+  display: block;
+}
+
 .btn-primary {
   background: var(--primary-color);
   color: white;
@@ -761,6 +765,9 @@ body {
   }
   .navbar {
     padding: 1rem;
+  }
+  .desktop-only {
+    display: none !important;
   }
   .nav-links {
     gap: 1rem;

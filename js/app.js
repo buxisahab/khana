@@ -166,12 +166,34 @@ if (bNavHome && bNavOrders && heroSection && categoryContainer && userOrdersSect
     activeBtn.classList.add('active');
   }
 
-  bNavHome.addEventListener('click', () => {
-    setActiveNav(bNavHome);
+  const dNavHome = document.getElementById('dNavHome');
+  const dNavOrders = document.getElementById('dNavOrders');
+  const desktopNavLogo = document.getElementById('desktopNavLogo');
+
+  function goHome() {
     heroSection.style.display = 'flex';
     categoryContainer.style.display = 'flex';
     foodFeed.style.display = 'grid';
     userOrdersSection.style.display = 'none';
+    if(dNavHome) { dNavHome.style.color = 'var(--primary-color)'; dNavOrders.style.color = 'var(--text-primary)'; }
+  }
+
+  function goOrders() {
+    heroSection.style.display = 'none';
+    categoryContainer.style.display = 'none';
+    foodFeed.style.display = 'none';
+    userOrdersSection.style.display = 'grid';
+    if(dNavOrders) { dNavOrders.style.color = 'var(--primary-color)'; dNavHome.style.color = 'var(--text-primary)'; }
+    fetchUserOrders();
+  }
+
+  if (dNavHome) dNavHome.addEventListener('click', (e) => { e.preventDefault(); goHome(); if(bNavHome) setActiveNav(bNavHome); });
+  if (dNavOrders) dNavOrders.addEventListener('click', (e) => { e.preventDefault(); goOrders(); if(bNavOrders) setActiveNav(bNavOrders); });
+  if (desktopNavLogo) desktopNavLogo.addEventListener('click', (e) => { e.preventDefault(); goHome(); if(bNavHome) setActiveNav(bNavHome); });
+
+  bNavHome.addEventListener('click', () => {
+    setActiveNav(bNavHome);
+    goHome();
   });
 
   bNavCart.addEventListener('click', () => {
@@ -181,11 +203,7 @@ if (bNavHome && bNavOrders && heroSection && categoryContainer && userOrdersSect
 
   bNavOrders.addEventListener('click', () => {
     setActiveNav(bNavOrders);
-    heroSection.style.display = 'none';
-    categoryContainer.style.display = 'none';
-    foodFeed.style.display = 'none';
-    userOrdersSection.style.display = 'grid';
-    fetchUserOrders();
+    goOrders();
   });
 
   bNavProfile.addEventListener('click', () => {
