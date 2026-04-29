@@ -81,7 +81,7 @@ if (navLogout) {
     e.preventDefault();
     try {
       await signOut(auth);
-      window.location.href = 'index.html';
+      // onAuthStateChanged will automatically show the login box
     } catch (error) {
       showToast(error.message);
     }
@@ -134,6 +134,36 @@ if (productForm) {
       productModal.classList.remove('active');
     } catch (error) {
       showToast("Failed to add product: " + error.message);
+    }
+  });
+}
+
+// Seed Demo Data
+const seedDemoBtn = document.getElementById('seedDemoBtn');
+if (seedDemoBtn) {
+  seedDemoBtn.addEventListener('click', async () => {
+    if(!confirm("Add 5 demo products?")) return;
+    
+    const demoProducts = [
+      { name: "Spicy Pepperoni Pizza", price: 14.99, description: "Hand-tossed crust topped with rich tomato sauce, mozzarella, and spicy pepperoni.", category: "Pizza", image: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=500&q=80" },
+      { name: "Classic Smash Cheeseburger", price: 8.99, description: "Double beef patty, melted cheddar, lettuce, tomato, and our secret sauce.", category: "Burger", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&q=80" },
+      { name: "Fresh Mint Lemonade", price: 4.50, description: "Refreshing freshly squeezed lemons blended with ice and mint leaves.", category: "Drinks", image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500&q=80" },
+      { name: "Mediterranean Caesar Salad", price: 10.99, description: "Crisp romaine, cherry tomatoes, croutons, parmesan, and grilled chicken.", category: "Healthy", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80" },
+      { name: "Decadent Lava Cake", price: 7.99, description: "Warm chocolate cake with a gooey molten center, served with vanilla ice cream.", category: "Desserts", image: "https://images.unsplash.com/photo-1563805042-7684c8e9e533?w=500&q=80" }
+    ];
+    
+    seedDemoBtn.innerText = "Seeding...";
+    seedDemoBtn.disabled = true;
+    try {
+      for(const p of demoProducts) {
+        await set(push(ref(db, 'products')), p);
+      }
+      showToast("Demo products seeded successfully!");
+    } catch(err) {
+      showToast("Seeding failed: " + err.message);
+    } finally {
+      seedDemoBtn.innerHTML = `<i class="fas fa-seedling"></i> Seed Demo Data`;
+      seedDemoBtn.disabled = false;
     }
   });
 }
